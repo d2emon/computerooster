@@ -30,7 +30,11 @@ bower_components
 .lock-wscript
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
+dist/electron/*
+dist/web/*
 build/Release
+build/*
+!build/icons
 
 # Dependency directories
 node_modules/
@@ -53,7 +57,11 @@ typings/
 
 # Yarn Integrity file
 .yarn-integrity
+yarn.lock
 
 # dotenv environment variables file
 .env
 
+.DS_Store
+thumbs.db
+!.gitkeep
