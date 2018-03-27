@@ -87,7 +87,7 @@
 </template>
 
 <script>
-import SystemInformation from './components/WelcomeView/SystemInformation'
+import SystemInformation from './components/SystemInformation'
 
 export default {
   name: 'computerooster',
@@ -98,6 +98,7 @@ export default {
     fixed: false,
     items: [
       { icon: 'apps', title: 'Welcome', to: '/' },
+      { icon: 'print', title: 'Принтеры', to: '/printers' },
       { icon: 'bubble_chart', title: 'Inspire', to: '/inspire' }
     ],
     miniVariant: false,

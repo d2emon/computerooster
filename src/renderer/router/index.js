@@ -1,5 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import WelcomeView from '@/views/WelcomeView'
+import Printers from '@/views/Printers'
+import InspireView from '@/views/InspireView'
 
 Vue.use(Router)
 
@@ -8,12 +11,17 @@ export default new Router({
     {
       path: '/',
       name: 'welcome-view',
-      component: require('@/components/WelcomeView').default
+      component: WelcomeView
+    },
+    {
+      path: '/printers',
+      name: 'printers',
+      component: Printers
     },
     {
       path: '/inspire',
       name: 'inspire',
-      component: require('@/components/InspireView').default
+      component: InspireView
     },
     {
       path: '*',
