@@ -11,7 +11,8 @@ const getters = {
   }),
   newPrinterModel: function (state) {
     return {
-      title: 'Новая Модель'
+      title: 'Новая Модель',
+      cartridge: ''
     }
   },
   newCartridgeModel: function (state) {
@@ -30,6 +31,9 @@ const mutations = {
   },
   ADD_PRINTER_MODEL (state, printerModel) {
     state.printerModels.push(printerModel)
+  },
+  ADD_CARTRIDGE_MODEL (state, cartridgeModel) {
+    state.cartridgeModels.push(cartridgeModel)
   }
 }
 

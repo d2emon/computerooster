@@ -66,8 +66,8 @@
             </v-card-text>
           </v-card>
         </v-tab-item>
-        <v-tab key="model-list">Модели Принтеров</v-tab>
-        <v-tab-item key="model-list">
+        <v-tab key="printer-model-list">Модели Принтеров</v-tab>
+        <v-tab-item key="printer-model-list">
           <v-card flat>
             <v-card-title class="headline">Модели Принтеров</v-card-title>
             <v-card-actions>
@@ -121,22 +121,22 @@
             </v-card-text>
           </v-card>
         </v-tab-item>
-        <v-tab key="model-list">Модели Картриджей</v-tab>
-        <v-tab-item key="model-list">
+        <v-tab key="cartridge-model-list">Модели Картриджей</v-tab>
+        <v-tab-item key="cartridge-model-list">
           <v-card flat>
             <v-card-title class="headline">Модели Картриджей</v-card-title>
             <v-card-actions>
-              <v-dialog v-model="editPrinterModel" persistent max-width="500px">
-                <v-btn color="primary" dark slot="activator" @click="addPrinterModel">Добавить</v-btn>
-                <v-card v-if="printerModel">
+              <v-dialog v-model="editCartridgeModel" persistent max-width="500px">
+                <v-btn color="primary" dark slot="activator" @click="addCartridgeModel">Добавить</v-btn>
+                <v-card v-if="cartridgeModel">
                   <v-card-title>
-                    <span class="headline" v-text="printerModel.title"></span>
+                    <span class="headline" v-text="cartridgeModel.title"></span>
                   </v-card-title>
                   <v-card-text>
                     <v-container grid-list-md>
                       <v-layout wrap>
                         <v-flex xs12>
-                          <v-text-field label="Название" v-model="printerModel.title" required></v-text-field>
+                          <v-text-field label="Название" v-model="cartridgeModel.title" required></v-text-field>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -144,19 +144,19 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="error" flat @click.native="editPrinterModel = false">Close</v-btn>
-                    <v-btn color="success" flat @click.native="savePrinterModel">Save</v-btn>
+                    <v-btn color="error" flat @click.native="editCartridgeModel = false">Close</v-btn>
+                    <v-btn color="success" flat @click.native="saveCartridgeModel">Save</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
             </v-card-actions>
             <v-card-text>
-              <template v-if="printerModels.length <= 0">
+              <template v-if="cartridgeModels.length <= 0">
                 <v-jumbotron color="grey lighten-2">
                   <v-container>
                     <v-layout align-center>
                       <v-flex>
-                        <h3 class="title">Вы пока не добавили ни одной модели принтера</h3>
+                        <h3 class="title">Вы пока не добавили ни одной модели картриджа</h3>
                       </v-flex>
                     </v-layout>
                   </v-container>
@@ -164,8 +164,8 @@
               </template>
               <template v-else>
                 <v-data-table
-                  :headers="printerModelHeaders"
-                  :items="printerModels"
+                  :headers="cartridgeModelHeaders"
+                  :items="cartridgeModels"
                   hide-actions
                 >
                   <template slot="items" slot-scope="props">
@@ -186,20 +186,26 @@ export default {
   name: 'printers',
   computed: {
     printers: function () { return this.$store.state.printer.printers },
-    printerModels: function () { return this.$store.state.printer.printerModels }
+    printerModels: function () { return this.$store.state.printer.printerModels },
+    cartridgeModels: function () { return this.$store.state.printer.cartridgeModels }
   },
   data: () => {
     return {
       tab: null,
       editPrinter: null,
       editPrinterModel: null,
+      editCartridgeModel: null,
       printer: null,
       printerModel: null,
+      cartridgeModel: null,
       headers: [
         { text: 'Имя', value: 'name' },
         { text: 'Модель', value: 'model.title' }
       ],
       printerModelHeaders: [
+        { text: 'Название', value: 'title' }
+      ],
+      cartridgeModelHeaders: [
         { text: 'Название', value: 'title' }
       ]
     }
@@ -220,6 +226,14 @@ export default {
     savePrinterModel: function () {
       this.editPrinterModel = false
       this.$store.commit('ADD_PRINTER_MODEL', this.printerModel)
+    },
+    addCartridgeModel: function () {
+      this.cartridgeModel = this.$store.getters.newCartridgeModel
+      this.editCartridgeModel = true
+    },
+    saveCartridgeModel: function () {
+      this.editCartridgeModel = false
+      this.$store.commit('ADD_CARTRIDGE_MODEL', this.cartridgeModel)
     }
   }
 }
